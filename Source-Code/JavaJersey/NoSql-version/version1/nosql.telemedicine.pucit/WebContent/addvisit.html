@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Insert Visit</title>
+	
+	<script src="js/jquery-min.js"></script>
+	<script src="js/polyfill.js"></script>
+	<script src="js/postvisit.js"></script>
+</head>
+<body>
+
+<h1>API Insert Visit</h1>
+
+<form id="post_example" name="post_example" action="#">
+<table>
+<tr>
+	<td>Visit ID</td>
+	<td><input type="text" name="visitid" id="visitid" maxlength="50" value=""></td>
+</tr>
+<!-- Made a change to PC_PARTS_CODE input after episode 6, input should ONLY numeric -->
+<tr>
+	<td>Visit Time</td>
+	<td><input type="text" name="visitime" id="visitime" maxlength="50" value=""></td>
+</tr>
+<tr>
+	<td>Visit Type</td>
+	<td><input type="text" name="visitype" id="visitype" maxlength="5" value=""></td>
+</tr>
+<tr>
+	<td>Visit Location</td>
+	<td><input type="text" name="visitloc" id="visitloc" maxlength="100" value=""></td>
+</tr>
+<tr>
+	<td>Patient ID</td>
+	<td><input type="text" name="patid" id="patid" maxlength="100" value=""></td>
+</tr>
+
+<tr>
+	<td></td>
+	<td><input type="button" name="submit_it" id="submit_it" value="Save"></td>
+</tr>
+<!-- <tr>
+	<td></td>
+	<td><input type="button" name="submit_it2" id="submit_it2" value="Submit v2"> Using JSON Array and Object</td>
+</tr> -->
+</table>
+</form>
+
+<br />
+<div id="div_ajaxResponse"></div>
+
+</body>
+</html>

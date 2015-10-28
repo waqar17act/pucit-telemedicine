@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta charset=utf-8 />
+	<title>Visit Data</title>
+	
+
+ <script src="js/jquery-min.js"></script>
+	<script src="js/polyfill.js"></script>
+	<script src="js/postvisitdata.js"></script>
+	
+	<script type="text/javascript">
+	
+	</script>
+</head>
+<body>
+
+<h1>Visit Data API</h1>
+
+<form id="post_example" name="post_example" action="#">
+<table>
+<tr>
+	<td>Visit Data ID</td>
+	<td><input type="text" name="visitdataid" id="visitdataid" maxlength="50" value=""></td>
+</tr>
+<tr>
+	<td>Description</td>
+	<td><input type="text" name="description" id="description" maxlength="50" value=""></td>
+</tr>
+<tr>
+	<td>Visit ID</td>
+	<td><input type="text" name="visitid" id="visitid" maxlength="5" value=""></td>
+</tr>
+<tr>
+	<td>Image Path</td>
+	 <td><input type="file" id="inputFileToLoad" onchange="encodeImageFileAsURL();"></input></td>
+	 <td><input type="hidden" name="imgpath" id="imgpath"  /></td>
+</tr>
+<tr>
+	<td>Image Type</td>
+	<td><input type="text" name="imgtype" id="imgtype" maxlength="100" value=""></td>
+</tr>
+
+<tr>
+	<td></td>
+	<td><input type="submit" name="submit_it" id="submit_it" value="Save"></td>
+</tr>
+<!-- <tr>
+	<td></td>
+	<td><input type="button" name="submit_it2" id="submit_it2" value="Submit v2"> Using JSON Array and Object</td>
+</tr> -->
+</table>
+</form>
+<br />
+<div id="div_ajaxResponse"></div>
+
+<script type='text/javascript'>
+function encodeImageFileAsURL(){
+var stg = null;
+    var filesSelected = document.getElementById("inputFileToLoad").files;
+    if (filesSelected.length > 0)
+    {
+        var fileToLoad = filesSelected[0];
+
+        var fileReader = new FileReader();
+
+        fileReader.onload = function(fileLoadedEvent) {
+        
+        //var encodedString = btoa(stg);
+            var srcData = fileLoadedEvent.target.result; // <--- data: base64
+
+            var newImage = document.createElement('img');
+            newImage.src = srcData;
+			
+            document.getElementById("imgpath").value = srcData;
+  //          alert("Converted Base64 version is "+document.getElementById("imgTest").innerHTML);
+//            console.log("Converted Base64 version is "+document.getElementById("imgTest").innerHTML);
+        }
+        fileReader.readAsDataURL(fileToLoad);
+    }
+}
+</script>
+</body>
+</html>

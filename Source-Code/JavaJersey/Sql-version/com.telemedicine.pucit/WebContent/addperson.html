@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Insert Person</title>
+	
+	<script src="js/jquery-min.js"></script>
+	<script src="js/polyfill.js"></script>
+<!--  	<script src="js/post.js"></script>
+	<script src="js/insertfields.js"></script>-->
+<script type="text/javascript">
+
+$('document').ready(function(){
+	  document.getElementById("persid").value = Math.floor(Math.random()*(1000000-0+1)+0);
+		var things = ['the','of','and','a','to','in','is','you','that','it','he','was','for','on','are','as','with','his','they','I','at','be','this','have','from','or','one','had','by','word','but','not','what','all','were','we','when','your','can','said','there','use','an','each','which','she','do','how','their','if','will','up','other','about','out','many','then','them','these','so','some','her','would','make','like','him','into','time','has','look','two','more','write','go','see','number','no','way','could','people','my','than','first','water','been','call','who','oil','its','now','find','long','down','day','did','get','come','made','may','part'];
+		var gender = ['Male','Female'];
+		document.getElementById("name").value = things[Math.floor(Math.random()*things.length)];
+		document.getElementById("gender").value = gender[Math.floor(Math.random()*gender.length)];
+		document.getElementById("role").value = things[Math.floor(Math.random()*things.length)];
+		document.getElementById("contact").value = things[Math.floor(Math.random()*things.length)];
+		document.getElementById("name").value = things[Math.floor(Math.random()*things.length)];
+		
+		document.getElementById("submit_it").click();
+			
+		//document.forms["post_example"].submit();
+	
+			var $post_example = $('#post_example');
+				var url      = window.location.hostname;     // Returns full URL
+	console.log(url);
+	
+			
+		console.log("submit button has been clicked");
+		//e.preventDefault(); //cancel form submit
+		
+		var jsObj = $post_example.serializeObject()
+			, ajaxObj = {};
+		
+		console.log(JSON.stringify(jsObj));
+		
+		ajaxObj = {  
+			type: "POST",
+			url: "http://"+url+":7001/com.telemedicine.pucit/api/add",
+			//url: "http://localhost:7001/com.telemedicine.pucit/api/add",
+			data: JSON.stringify(jsObj),
+			contentType:"application/json",
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log("Error " + jqXHR.getAllResponseHeaders() + " " + errorThrown);
+			},
+			success: function(data) { 
+				console.log(data);
+				if(data[0].HTTP_CODE == 200) {
+					$('#div_ajaxResponse').text( data[0].MSG );
+				}
+			},
+			complete: function(XMLHttpRequest) {
+				console.log( XMLHttpRequest.getAllResponseHeaders() );
+			}, 
+			dataType: "json" //request JSON
+		};
+
+		console.log("submitted "+ajaxObj);
+		$.ajax(ajaxObj); 
+		//    window.location.reload();  
+				//console.log(ajaxObj);
+	$('#post_example').submit(function () {
+		 return false;
+		});
+	
+	  $("#post_example").submit(function(e) {
+		    e.preventDefault();
+		});
+	
+});
+
+
+
+/**
+ * js file for post.html
+ * Please use modern web browser as this file will not attempt to be
+ * compatible with older browsers. Use Chrome and open javascript console
+ * or Firefox with developer console.
+ * 
+ * jquery is required
+ */
+$(document).ready(function() {
+	console.log("ready");
+	
+	var $post_example = $('#post_example');
+	
+	/**
+	 * This is for the Submit button
+	 * It will trigger a ajax POST call to: api/v2/inventory
+	 * This will submit a item entry to our inventory database
+	 */
+//	var pathname = window.location.pathname; // Returns path only
+	var url      = window.location.hostname;     // Returns full URL
+	console.log(url);
+	
+	$('#submit_it').click(function(e) {
+		
+		console.log("submit button has been clicked");
+		//e.preventDefault(); //cancel form submit
+		
+		var jsObj = $post_example.serializeObject()
+			, ajaxObj = {};
+		
+		console.log(jsObj);
+		
+		ajaxObj = {  
+			type: "POST",
+			url: "http://"+url+":7001/com.telemedicine.pucit/api/add",
+			//url: "http://localhost:7001/com.telemedicine.pucit/api/add",
+			data: JSON.stringify(jsObj), 
+			contentType:"application/json",
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log("Error " + jqXHR.getAllResponseHeaders() + " " + errorThrown);
+			},
+			success: function(data) { 
+				//console.log(data);
+				if(data[0].HTTP_CODE == 200) {
+					$('#div_ajaxResponse').text( data[0].MSG );
+				}
+			},
+			complete: function(XMLHttpRequest) {
+				console.log( XMLHttpRequest.getAllResponseHeaders() );
+			}, 
+			dataType: "json" //request JSON
+		};
+		
+		$.ajax(ajaxObj);
+	});
+	
+	/**
+	 * This is for the 2nd Submit button "Submit v2"
+	 * It will do the same thing as Submit above but the api
+	 * will process it in a different way.
+	 */
+	$('#submit_it2').click(function(e) {
+		//console.log("submit button has been clicked");
+		e.preventDefault(); //cancel form submit
+		
+		var jsObj = $post_example.serializeObject()
+			, ajaxObj = {};
+		
+		//console.log(jsObj);
+		
+		ajaxObj = {  
+			type: "POST",
+			url: "http://"+url+":7001/com.telemedicine.pucit/api/add",
+//			url: "http://localhost:7001/com.telemedicine.pucit/api/add",
+			data: JSON.stringify(jsObj), 
+			contentType:"application/json",
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log("Error " + jqXHR.getAllResponseHeaders() + " " + errorThrown);
+			},
+			success: function(data) { 
+				//console.log(data);
+				if(data[0].HTTP_CODE == 200) {
+					$('#div_ajaxResponse').text( data[0].MSG );
+				}
+			},
+			complete: function(XMLHttpRequest) {
+				//console.log( XMLHttpRequest.getAllResponseHeaders() );
+			}, 
+			dataType: "json" //request JSON
+		};
+		
+		$.ajax(ajaxObj);
+	});
+});
+</script>
+
+</head>
+
+
+<body>
+
+<h1>API Insert Person</h1>
+
+<form id="post_example" name="post_example" onsubmit="return false;" action="#">
+<table>
+<tr>
+	<td>Person ID</td>
+	<td><input type="text" name="persid" id="persid" maxlength="50" value=""></td>
+</tr>
+<!-- Made a change to PC_PARTS_CODE input after episode 6, input should ONLY numeric -->
+<tr>
+	<td>Person Name</td>
+	<td><input type="text" name="name" id="name" maxlength="20" value=""></td>
+</tr>
+<tr>
+	<td>Person Gender</td>
+	<td><input type="text" name="gender" id="gender" maxlength="50" value=""></td>
+</tr>
+<tr>
+	<td>Person Role</td>
+	<td><input type="text" name="role" id="role" maxlength="10" value=""></td>
+</tr>
+<tr>
+	<td>Person Contact</td>
+	<td><input type="text" name="contact" id="contact" maxlength="100" value=""></td>
+</tr>
+<tr>
+	<td></td>
+	<td><input type="button" name="submit_it" id="submit_it" value="Save"></td>
+</tr>
+<!-- <tr>
+	<td></td>
+	<td><input type="button" name="submit_it2" id="submit_it2" value="Submit v2"> Using JSON Array and Object</td>
+</tr> -->
+</table>
+</form>
+
+<br />
+<div id="div_ajaxResponse"></div>
+
+</body>
+</html>
