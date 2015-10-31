@@ -1,0 +1,5 @@
+*.sql filter=lfs diff=lfs merge=lfs -crlf
+*.0 filter=lfs diff=lfs merge=lfs -crlf
+*.1 filter=lfs diff=lfs merge=lfs -crlf
+*.2 filter=lfs diff=lfs merge=lfs -crlf
+*.3 filter=lfs diff=lfs merge=lfs -crlf
